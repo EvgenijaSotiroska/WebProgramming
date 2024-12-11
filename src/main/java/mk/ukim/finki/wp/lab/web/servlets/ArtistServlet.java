@@ -23,7 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet(name="artist", urlPatterns = "/artist")
+@WebServlet(name="artist", urlPatterns = "/servlet/artist")
 public class ArtistServlet extends HttpServlet {
     private final SpringTemplateEngine templateEngine;
     private final ArtistServiceImpl artistService;

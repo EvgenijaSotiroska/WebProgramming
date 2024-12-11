@@ -18,11 +18,11 @@ public class SongRepository {
         return DataHolder.songList.stream().filter(r->r.getTrackId().equals(trackId)).findFirst().orElse(null);
     }
 
-    public Artist addArtistToSong(Artist artist, Song song){
-        DataHolder.songList.stream().filter(r->r.getTrackId().equals(song.getTrackId()))
-                .forEach(r->r.addPerformer(artist));
-        return artist;
-    }
+//    public Artist addArtistToSong(Artist artist, Song song){
+//        DataHolder.songList.stream().filter(r->r.getTrackId().equals(song.getTrackId()))
+//                .forEach(r->r.addPerformer(artist));
+//        return artist;
+//    }
 
     public void deleteSong(Long id){
         DataHolder.songList.removeIf(r->r.getId().equals(id));

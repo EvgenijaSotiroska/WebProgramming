@@ -17,11 +17,11 @@ public class DataHolder {
 
     @PostConstruct
     public void init(){
-        artistList.add(new Artist("Bruno","Mars", 143L, "Bruno Mars bio"));
-        artistList.add(new Artist("Alicia","Keys", 144L, "Alicia Keys bio"));
-        artistList.add(new Artist("Dua","Lipa", 145L, "Dua Lipa bio"));
-        artistList.add(new Artist("Justin","Timberlake", 146L, "Justin Timberlake bio"));
-        artistList.add(new Artist("Jennifer","Lopez", 147L, "Jennifer Lopez bio"));
+        artistList.add(new Artist("Bruno","Mars",  "Bruno Mars bio"));
+        artistList.add(new Artist("Alicia","Keys",  "Alicia Keys bio"));
+        artistList.add(new Artist("Dua","Lipa",  "Dua Lipa bio"));
+        artistList.add(new Artist("Justin","Timberlake",  "Justin Timberlake bio"));
+        artistList.add(new Artist("Jennifer","Lopez", "Jennifer Lopez bio"));
 
         Album album1= new Album("Radical Optimism", 2024,"pop");
         albumList.add(album1);

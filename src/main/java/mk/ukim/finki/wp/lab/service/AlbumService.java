@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface AlbumService {
     List<Album> findAll();
     Optional<Album> findById(Long id);
+    List<Album> findByName(String title);
 }

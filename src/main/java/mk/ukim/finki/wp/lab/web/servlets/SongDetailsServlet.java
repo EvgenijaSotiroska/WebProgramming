@@ -49,7 +49,7 @@ public class SongDetailsServlet extends HttpServlet {
         if(trackId != null && artistId != null){
             s=songService.findByTrackId(trackId);
             Artist a=artistService.findById(Long.valueOf(artistId)).orElse(null);
-            s.addPerformer(a);
+       //     s.addPerformer(a);
         }
 
         IWebExchange iWebExchange = JakartaServletWebApplication

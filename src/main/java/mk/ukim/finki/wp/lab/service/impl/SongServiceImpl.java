@@ -3,7 +3,8 @@ package mk.ukim.finki.wp.lab.service.impl;
 import mk.ukim.finki.wp.lab.model.Artist;
 import mk.ukim.finki.wp.lab.model.Song;
 import mk.ukim.finki.wp.lab.repository.ArtistRepository;
-import mk.ukim.finki.wp.lab.repository.SongRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.ArtistJpaRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.SongJpaRepository;
 import mk.ukim.finki.wp.lab.service.SongService;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class SongServiceImpl implements SongService {
-    private final ArtistRepository artistRepository;
-    private final SongRepository songRepository;
+    private final ArtistJpaRepository artistRepository;
+    private final SongJpaRepository songRepository;
 
-    public SongServiceImpl(ArtistRepository artistRepository, SongRepository songRepository) {
+    public SongServiceImpl(ArtistJpaRepository artistRepository, SongJpaRepository songRepository) {
         this.artistRepository = artistRepository;
         this.songRepository = songRepository;
     }
@@ -27,8 +28,9 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public Artist addArtistToSong(Artist artist, Song song) {
-        return songRepository.addArtistToSong(artist,song);
+    public Song addArtistToSong(Artist artist, Song song) {
+        song.getPerformers().add(artist);
+        return songRepository.save(song);
     }
 
     @Override
@@ -42,17 +44,23 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public void deleteSong(Long id) {
-        songRepository.deleteSong(id);
+    public void deleteById(Long id) {
+        songRepository.deleteById(id);
     }
 
     @Override
-    public Song findById(Long id) {
+    public Optional<Song> findById(Long id) {
         return songRepository.findById(id);
     }
 
     @Override
     public void updateSong(Song song) {
-        songRepository.update(song);
+        songRepository.delete(song);
+        songRepository.save(song);
+    }
+
+    @Override
+    public List<Song> findByAlbum(Long id) {
+        return songRepository.findAllByAlbum_Id(id);
     }
 }

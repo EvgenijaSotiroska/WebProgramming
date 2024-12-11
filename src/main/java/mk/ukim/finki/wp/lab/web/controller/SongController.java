@@ -32,16 +32,16 @@ public class SongController {
 
     @GetMapping("/delete/{id}")
     public String deleteSong(@PathVariable Long id){
-        this.songService.deleteSong(id);
+        this.songService.deleteById(id);
         return "redirect:/songs";
     }
 
     @GetMapping("/edit-form/{songId}")
     public String editSong(@PathVariable Long songId, Model model){
-        Song song = songService.findById(songId);
-        if (song == null) {
-            return "redirect:/songs";
-        }
+        Song song = songService.findById(songId).orElse(new Song());
+//        if (song.isEmpty()) {
+//            return "redirect:/songs";
+//        }
         model.addAttribute("song", song);
         model.addAttribute("albums", albumService.findAll());
         return "add-song";
@@ -66,6 +66,14 @@ public class SongController {
         model.addAttribute("albums", albums);
         return "add-song";
     }
+
+    @GetMapping("/search")
+    public String searchSong(@RequestParam Long album_id, Model model){
+        List<Song> songs= songService.findByAlbum(album_id);
+        model.addAttribute("songs", songs);
+        return "listSongs";
+    }
+
     @PostMapping("/save")
     public String saveSong(@RequestParam String title, @RequestParam String genre, Model model,
                            @RequestParam int releaseYear, @RequestParam Long albumId, @RequestParam String trackId){
